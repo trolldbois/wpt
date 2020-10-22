@@ -38,7 +38,7 @@ function parse(importMap, importMapBaseURL) {
 
     const testHTML = `
       <body>
-      <script src="${location.origin}/import-maps/common/resources/common-test-helper-iframe.js"></script>
+      <script src="${location.origin}/import-maps/data-driven/resources/common-test-helper-iframe.js"></script>
       <script type="importmap" onerror="onScriptError(event)">
       ${importMapString}
       </script>
