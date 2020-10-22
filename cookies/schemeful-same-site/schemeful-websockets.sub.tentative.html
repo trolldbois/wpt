@@ -14,10 +14,12 @@
     document.cookie = `samesite_lax=1; sameSite=lax; path=/`;
 
     var ws = new WebSocket("ws://{{host}}:{{ports[ws][0]}}/echo-cookie");
+    console.log('ws URL:', ws.url);
     ws.onclose = t.step_func_done(function () {
       assert_unreached("'close' should not fire before 'open'.");
     });
     ws.onmessage = t.step_func(function (e) {
+      console.log('ws.onmessage, e.data:', e.data);
       ws.onclose = null;
       ws.close();
       // Same-scheme WebSockets should get both cookies
@@ -25,10 +27,12 @@
       assert_regexp_match(e.data, /samesite_lax=1/);
 
       var ws2 = new WebSocket("wss://{{host}}:{{ports[wss][0]}}/echo-cookie");
+      console.log('ws2 URL:', ws2.url);
       ws2.onclose = t.step_func_done(function () {
         assert_unreached("'close' should not fire before 'open'.");
       });
       ws2.onmessage = t.step_func_done(function (e2) {
+        console.log('ws2.onmessage, e2.data:', e2.data);
         ws2.onclose = null;
         ws2.close();
         // Cross-scheme WebSockets shouldn't get anything.

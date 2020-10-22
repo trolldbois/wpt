@@ -195,6 +195,7 @@ class Dispatcher(object):
                       canonical path is not under root_dir.
         """
 
+        print("pywebsocket3, Dispatcher constructor")
         self._logger = util.get_class_logger(self)
 
         self._handler_suite_map = {}
