@@ -57,7 +57,7 @@ def test_url_not_https(path):
     "a.https.www.b.c",
     "a.b.https.www.c.d",
 ])
-def test_url_https(path):
+def test_url_subdomain(path):
     m = HarnessTest("/foo", "bar/" + path, "/", "bar/" + path)
 
     assert m.subdomain is True
@@ -72,7 +72,7 @@ def test_url_https(path):
     "a.bwwww.c",
     "a.wwwwb.c",
 ])
-def test_url_not_https(path):
+def test_url_not_subdomain(path):
     m = HarnessTest("/foo", "bar/" + path, "/", "bar/" + path)
 
     assert m.subdomain is False
