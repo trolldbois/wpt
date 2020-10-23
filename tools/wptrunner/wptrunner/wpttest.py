@@ -192,8 +192,8 @@ class Test(object):
                    test_metadata,
                    timeout=timeout,
                    path=os.path.join(manifest_file.tests_root, manifest_item.path),
-                   subdomain=manifest_item.subdomain,
-                   protocol=server_protocol(manifest_item))
+                   protocol=server_protocol(manifest_item),
+                   subdomain=manifest_item.subdomain)
 
     @property
     def id(self):
@@ -457,10 +457,10 @@ class ReftestTest(Test):
     test_type = "reftest"
 
     def __init__(self, tests_root, url, inherit_metadata, test_metadata, references,
-                 timeout=None, path=None, viewport_size=None, dpi=None, fuzzy=None, protocol="http",
-                 subdomain=None, quic=False):
+                 timeout=None, path=None, viewport_size=None, dpi=None, fuzzy=None,
+                 protocol="http", quic=False):
         Test.__init__(self, tests_root, url, inherit_metadata, test_metadata, timeout,
-                      path, protocol, subdomain, quic)
+                      path, protocol, quic)
 
         for _, ref_type in references:
             if ref_type not in ("==", "!="):
@@ -498,7 +498,6 @@ class ReftestTest(Test):
                    timeout=timeout,
                    path=manifest_test.path,
                    quic=quic,
-                   subdomain=manifest_test.subdomain,
                    **cls.cls_kwargs(manifest_test))
 
         refs_by_type = defaultdict(list)
