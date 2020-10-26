@@ -202,6 +202,7 @@ def test_run_failing_test():
 
     with pytest.raises(SystemExit) as excinfo:
         wpt.main(argv=["run", "--log-mach=-", "--log-mach-verbose", "--yes", "--no-pause", "--binary-arg", "headless",
+                       "--binary-arg=--enable-logging=stderr",
                        "--no-fail-on-unexpected", "--channel", "dev", "--webdriver-arg=--verbose",
                        "chrome", failing_test])
     assert excinfo.value.code == 0
